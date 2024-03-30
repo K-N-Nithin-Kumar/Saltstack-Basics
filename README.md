@@ -136,7 +136,7 @@ We'll set up a basic Salt Master - Minion using Docker containers. We'll create 
     ```
 
     **Reference**
-    [Saltstak](Introduction (saltproject.io))
+    [Saltstak](https://docs.saltproject.io/en/getstarted/system/index.html)
 
     ## Remote Execution
 
@@ -157,6 +157,13 @@ We'll set up a basic Salt Master - Minion using Docker containers. We'll create 
    * salt '*': This part of the command specifies that the command should be run on all connected Salt Minions, using the "" target specifier.
    * cmd.run 'date': This part of the command specifies the command that should be executed on the Salt Minions. In this case, the "date" command is being executed, which will return the current date and time on each Minion.
    * The output of this command will be the current date and time on each connected Salt Minion, which can be useful for quickly checking the system clock across multiple systems.
+
+
+   **To run a command on a specific minion in SaltStack, you can use Salt's targeting system to specify which minions should execute the command.**
+
+For example, if you want to run a date command only on a minion with id ```08549666c3a1```, then the command would look like this:- ```salt-master salt '08549666c3a1' cmd.run 'date'```.
+
+Read more about the targeting system here:- [Saltstack](https://docs.saltproject.io/en/getstarted/fundamentals/targeting.html)
     
     
 
