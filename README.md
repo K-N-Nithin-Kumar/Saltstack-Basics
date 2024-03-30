@@ -170,6 +170,26 @@ Read more about the targeting system here:- [Saltstack](https://docs.saltproject
 ## Salt Execution Modules
 While shelling out using cmd.run is certainly useful, the real power comes when you add Salt execution functions. Salt execution modules are the core components of the SaltStack configuration management system. These modules provide a wide range of functions that can be used to manage and configure systems remotely. They are Python files that define functions that can be called using the Salt command-line interface (CLI) or through Salt's Remote Execution system.
 
+**The Ad hoc commands executed from the command line against one or more managed systems. Useful for:**
+
+* Real-time monitoring, status, and inventory
+* One-off commands and scripts 
+* Deploying critical updates
+
+**Some common built-in execution modules include:**
+
+* pkg: Manages software packages
+* file: Manages files and directories
+* service: Manages system services
+* user: Manages user accounts
+* network: Manages network settings
+
+*****
+
+The Salt community has put tremendous effort into creating hundreds of functions that simplify most management tasks. Even better, the same function can be used consistently across all supported platforms. Resist the urge to shell out. Learn the ways of the Salt execution functions.
+
+We can list all the available execution modules on all connected Minions using the following ```salt '*' sys.list_modules``` command.
+
 
 
     
