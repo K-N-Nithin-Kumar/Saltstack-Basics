@@ -97,14 +97,12 @@ We'll set up a basic Salt Master - Minion using Docker containers. We'll create 
    
     ```
      sudo docker network create salt-network
-    
     ```
 
 6. Run Salt Master container
    
    ```   
     sudo docker run -d --name salt-master --network salt-network -p 4505:4505 -p 4506:4506 salt-master
-   
    ```
    
 7. Run a few Salt Minion containers:
@@ -138,7 +136,29 @@ We'll set up a basic Salt Master - Minion using Docker containers. We'll create 
     ```
 
     **Reference**
-    [Github](Introduction (saltproject.io))
+    [Saltstak](Introduction (saltproject.io))
+
+    ## Remote Execution
+
+       Remote execution is a core feature of Salt that allows you to execute commands on multiple systems concurrently using the Salt Master. Salt uses a high-speed messaging system to communicate between the Master and its 
+       Minions. You can use Salt to execute shell commands, manage files, or execute custom Salt modules on Minion nodes. This feature allows Salt administrators to manage large fleets of systems in a centralized manner 
+       and perform various administrative tasks, such as software updates, system monitoring, and troubleshooting.
+
+       Salt uses a publish-subscribe model where Minions listen for commands from the Master and execute them. Commands are sent securely over an encrypted channel, and results are returned to the Master.
+
+    **To check the current date and time on all Minion nodes, run the following command from the Salt Master:**
+
+    Salt lets you remotely execute shell commands across multiple systems using ```cmd.run.```
+    
+    ```sudo docker exec -it salt-master salt '*' cmd.run 'date'```
+
+    **Here's a breakdown of what each part of the command does:**
+
+   * salt '*': This part of the command specifies that the command should be run on all connected Salt Minions, using the "" target specifier.
+   * cmd.run 'date': This part of the command specifies the command that should be executed on the Salt Minions. In this case, the "date" command is being executed, which will return the current date and time on each Minion.
+   * The output of this command will be the current date and time on each connected Salt Minion, which can be useful for quickly checking the system clock across multiple systems.
+    
+    
 
    
     
