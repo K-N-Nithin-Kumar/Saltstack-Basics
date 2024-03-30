@@ -237,6 +237,26 @@ The ```salt-call disk.usage``` command is used to retrieve disk usage informatio
 We can browse through all the available execution functions related to disk management on all the Salt Minions that are connected to the Salt Master using ```salt '*' sys.list_functions disk ```command. 
 To view functions for other modules, you can replace disk with the given module name in the above command.
 
+# Salt Stack Advanced
+
+## Salt States
+
+Remote execution is a big time saver, but it has some shortcomings. Most tasks you perform are a combination of many commands, tests, and operations, each with their own nuances and points-of-failure. Often an attempt is made to combine all of these steps into a central shell script, but these quickly get unwieldy and introduce their own headaches.
+
+To solve this, SaltStack configuration management lets you create a re-usable configuration template, called a state, that describes everything required to put a system component or application into a known configuration.
+
+Let's say you want to configure an Apache web server to host a website. To do this manually, you would need to install Apache, create a virtual host file for the website, configure Apache to serve the website, and start the Apache service. This can be time-consuming and error-prone, especially when you need to configure multiple web servers.
+
+To automate this process, you can use Salt States. A Salt State is like a recipe for configuring a system. You define the desired state of the system, and Salt takes care of the rest.
+
+States are much easier to understand when you see them in action, so let’s make one. States are described using YAML, and are simple to create and read.
+
+## Create a Salt State to Install the apache2 Package
+
+To install the apache2 package on a system using Salt, you can create a state file that uses the ```pkg.installed``` state module. Here are the steps to create this state file:
+
+
+
   
 
 
