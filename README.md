@@ -255,6 +255,42 @@ States are much easier to understand when you see them in action, so let’s mak
 
 To install the apache2 package on a system using Salt, you can create a state file that uses the ```pkg.installed``` state module. Here are the steps to create this state file:
 
+### Activity
+1. Open a new terminal log in to the salt-master container  using the following command:
+```
+  sudo docker exec -it  salt-master /bin/bash
+```
+2. Create a new file under the ```/srv/salt/apache``` directory with a ```.sls``` extension, such as ```package.sls```.
+   ```
+   mkdir -p /srv/salt/apache
+   cd /srv/salt/apache
+   touch package.sls
+   ```
+3. Add the following content to the ```package.sls``` file using ```nano /srv/salt/apache/package.sls```:
+   ```   
+   apache_installation:
+     pkg.installed:
+       - name: apache2
+   ```
+4. Let’s test the state on the first minion. You can get the id of the first minion by running the following command in salt-master.
+   ```
+    salt-key -L
+   ```
+   Here, as per the above cmd output, 38972bb4cdb0 is the id of first minion. It will be different for your case.Execute below cmd
+   ```      
+     salt '<minion-id>' state.apply apache.package test=True
+   ```
+   The output shows the result of the ```pkg.installed ``` salt state function defined in the ```apache``` module. The state is named ```apache_installation``` and its function is to ensure that the ```apache2``` package is installed on the minion.
+
+   The summary at the end shows that the state application was successful and no changes were made to the minion.
+
+
+   The ```test=True``` parameter instructs Salt to simulate the state application without actually executing any changes. This is useful for testing the state changes before applying them to the minion.
+
+   
+
+
+
 
 
   
