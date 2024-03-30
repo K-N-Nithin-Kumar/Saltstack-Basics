@@ -301,6 +301,11 @@ To install the apache2 package on a system using Salt, you can create a state fi
      * Note that the actual changes made to each minion depend on the configuration of the ```apache``` state module and the current state of each minion. The ```state.apply``` function will only apply the state changes 
       that are required to bring each minion into the desired state.
 
+
+            You can use the following command to check if Apache is installed on all connected minions:
+       
+            ```salt '*' pkg.list_pkgs | grep apache```
+
    
 
 
