@@ -46,7 +46,82 @@ We'll set up a basic Salt Master - Minion using Docker containers. We'll create 
 
    ----
    The master directive is used to specify the hostname or IP address of the Salt Master server. In our case, we set it to salt-master, which will be the service name of the docker container which will be created in next steps. Docker's internal DNS resolver will automatically resolve this service name to the IP address of the Salt Master container. This way, the Salt Minion knows where to find the Salt Master.
+     
    ------
+
+3. Create Docker images for Salt Master and Minions. First, create a Dockerfile for the Salt Master:
+   
+   ```vim Dockerfile.master```
+   Copy below code snippet.
+
+   ```
+   FROM ubuntu:18.04
+   
+   RUN apt-get update && \
+       apt-get install -y salt-master nano
+   
+   COPY master-config.conf /etc/salt/master
+   
+   EXPOSE 4505 4506
+   
+   CMD ["salt-master", "-l", "info"]
+   ```
+
+   Now, create a Dockerfile for the Salt Minions:
+
+   ```vim Dockerfile.minion```
+   Copy below code snippet.
+
+   ```
+   FROM ubuntu:18.04
+   
+   RUN apt-get update && \
+       apt-get install -y salt-minion
+   
+   COPY minion-config.conf /etc/salt/minion
+   
+   CMD ["salt-minion", "-l", "info"]
+   ```
+   The /etc/salt/ directory contains the Salt configuration files, including the master and minion configuration files.
+
+4. Build Docker images. In the ~/workspace/saltcfg directory containing the Dockerfile.master and Dockerfile.minion, run these commands:
+   ```
+     sudo docker build -t salt-master -f Dockerfile.master .
+   ```
+
+   ```
+     sudo docker build -t salt-minion -f Dockerfile.minion .
+   ```
+   
+5. Create a custom Docker network to allow the Salt Master and Minions to communicate with each other.
+   
+    ```
+     sudo docker network create salt-network
+    
+    ```
+
+6. Run Salt Master container
+   
+   ```   
+    sudo docker run -d --name salt-master --network salt-network -p 4505:4505 -p 4506:4506 salt-master
+   
+   ```
+7.Run a few Salt Minion containers:
+
+   ```
+     sudo docker run -d --name salt-minion-1 --network salt-network salt-minion
+   ```
+   ```
+     sudo docker run -d --name salt-minion-2 --network salt-network salt-minion
+   ```
+  
+   
+
+
+
+   
+
+
    
    
    
