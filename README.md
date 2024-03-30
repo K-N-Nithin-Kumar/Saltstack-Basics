@@ -287,6 +287,20 @@ To install the apache2 package on a system using Salt, you can create a state fi
 
    The ```test=True``` parameter instructs Salt to simulate the state application without actually executing any changes. This is useful for testing the state changes before applying them to the minion.
 
+5. As we can see that state is well-defined as per the above test results, we can apply it to all the minions using the below command:
+    ``` salt '*' state.apply apache.package ```
+
+     The Salt command ```salt '*' state.apply apache.package``` applies the state defined in the apache module to all minions.
+
+     * This command instructs Salt to apply the ```apache``` module's state to all minions in the Salt environment. The ```state.apply``` function is used to apply the state and the ```apache.package``` argument specifies 
+      the state to be applied from the ```apache``` module.
+   
+     * When this command is executed, Salt will apply the ```apache``` state module to each minion and install the ```apache2``` package if it is not already installed. This assumes that the ```apache``` state module is 
+     configured to install the ```apache2``` package.
+
+     * Note that the actual changes made to each minion depend on the configuration of the ```apache``` state module and the current state of each minion. The ```state.apply``` function will only apply the state changes 
+      that are required to bring each minion into the desired state.
+
    
 
 
