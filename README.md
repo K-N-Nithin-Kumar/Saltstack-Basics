@@ -106,15 +106,43 @@ We'll set up a basic Salt Master - Minion using Docker containers. We'll create 
     sudo docker run -d --name salt-master --network salt-network -p 4505:4505 -p 4506:4506 salt-master
    
    ```
-7.Run a few Salt Minion containers:
+   
+7. Run a few Salt Minion containers:
 
    ```
      sudo docker run -d --name salt-minion-1 --network salt-network salt-minion
    ```
+
    ```
      sudo docker run -d --name salt-minion-2 --network salt-network salt-minion
    ```
-  
+8. When a new Salt Minion is set up and attempts to connect to the Salt Master, the Master will receive a request to accept the Minion's public key. Run the below command to list the public keys of all the Salt Minions that 
+  have requested to connect to the Salt Master.
+
+   ```
+      sudo docker exec -it salt-master salt-key -L
+   ```
+   
+9. Accept all pending public keys for Salt Minions that have requested to connect to the Salt Master, without any manual confirmation prompts using below command:
+
+    ```
+       sudo docker exec -it salt-master salt-key -A -y
+    ```
+    -----------
+   Accepting a Minion's key means that the Master server is acknowledging that it trusts the Minion and will allow it to communicate with the Master. This process involves verifying the Minion's identity and ensuring that 
+   it is authorized to connect to the Master. Once the key is accepted, the Master will add the Minion to its list of authorized clients and grant it access to the Salt infrastructure.
+   
+10. Test your Salt Master and Minions setup by running a simple command from the Salt Master.
+    ```
+      sudo docker exec -it salt-master salt '*' test.ping
+    ```
+
+    **Reference**
+    [Github](Introduction (saltproject.io))
+
+   
+    
+    
    
 
 
