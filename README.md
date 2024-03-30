@@ -9,11 +9,14 @@ SaltStack is an open-source software for configuration management, remote execut
    correctly, running smoothly, and delivering services to end-users efficiently.
 * SaltStack helps system administrators to maintain consistency, reduce errors, and save time, just like a chef who manages a large kitchen with many cooks and many dishes to prepare.
 
-# Setting up a Salt environment
-Setting up a Salt environment
+## Setting up a Salt environment
+
 Setting up a Salt environment involves creating a working Salt infrastructure that includes a Salt Master server and one or more Salt Minion servers, and configuring them to work together to manage your IT infrastructure.
+****************
+We'll set up a basic Salt Master - Minion using Docker containers. We'll create 3 containers: one for the Salt master server and another two for the Salt minion servers.
 
 
-image
+
+
 
 
