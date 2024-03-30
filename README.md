@@ -304,7 +304,7 @@ To install the apache2 package on a system using Salt, you can create a state fi
 
        You can use the following command to check if Apache is installed on all connected minions:
        
-            ```salt '*' pkg.list_pkgs | grep apache```
+       ```salt '*' pkg.list_pkgs | grep apache```
 
       ```/srv/salt/ ``` is the default directory where user defined Salt states are stored. This directory is used to store the Salt state files that define how the managed systems should be configured. Each Salt state is 
        defined in a ```.sls``` file, and these files are typically organized into directories according to their function or purpose.
@@ -313,6 +313,67 @@ To install the apache2 package on a system using Salt, you can create a state fi
      view functions for other modules, you can replace pkg with the given salt state module name in the above command.
 
    *************
+   ## Salt Execution vs Salt State Functions
+
+   Salt execution functions and Salt state functions are two different important components of the SaltStack configuration management system.
+
+   1. Salt Execution Functions
+
+      Salt execution functions are commands that you can run on the Salt master to execute tasks directly on Salt minions. These functions are part of Salt's remote execution system, which allows you to manage and execute 
+      tasks on minions in real-time. Some examples of execution functions are:
+
+         * Installing a package on a minion: ```salt '<minion_id>' pkg.install apache2```
+         * Restarting a service on a minion: ```salt '<minion_id>' service.restart apache2```
+         * Running a shell command on a minion: ```salt '<minion_id>' cmd.run 'ls /var/log'```
+
+   2. Salt State Functions
+
+      Salt state functions, on the other hand, are part of SaltStack's declarative configuration management system. They are used within Salt state files (SLS files) to define the desired state of a system. When a Salt 
+      state is applied, Salt state functions are used to determine what actions need to be taken to bring the system into the desired state. Some examples of state functions include:
+
+        * Ensuring a package is installed:
+             ```
+            install_package:
+              pkg.installed:
+                - name: apache2
+             ```
+        * Ensuring a service is running:
+          ```
+            start_service:
+              service.running:
+                - name: apache2
+          ```
+       * Set permissions and ownership of a file:
+         ```
+         set_permissions_and_ownership:
+           file.managed:
+             - name: /etc/myapp/secure.conf
+             - source: salt://myapp/secure.conf
+             - user: myappuser
+             - group: myappgroup
+             - mode: 640
+         ```
+
+      *********
+      ## Differences
+
+      1. Salt execution functions are used for real-time, imperative tasks, while Salt state functions are used for declarative configuration management.
+      2. Salt execution functions are run directly from the Salt master using the salt command, while Salt state functions are defined in ```.sls``` files and applied using the ```state.apply``` command.
+      3. Salt execution functions execute tasks immediately, whereas Salt state functions ensure that the system is in the desired state, making any necessary changes.
+      4. Salt state functions are generally idempotent, meaning they can be run multiple times without causing side effects, while Salt execution functions may not be idempotent depending on the command being executed.
+         * Salt state functions are like setting a thermostat to a desired temperature. Once the room reaches the desired temperature, the thermostat will not make further changes, even if you keep setting it to the same 
+           temperature.
+         * Salt execution functions are like turning on a heater manually. If you turn on the heater multiple times, you might end up overheating the room, causing unintended side effects.
+      
+
+
+      
+  
+   
+   
+
+
+   
    
 
 
