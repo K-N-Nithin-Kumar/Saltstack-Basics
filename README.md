@@ -21,6 +21,16 @@ We'll set up a basic Salt Master - Minion using Docker containers. We'll create 
       sudo systemctl start docker
       sudo docker --version
    ```
+2. Create configuration files for the Salt master and Salt minion servers. These files define settings such as the IP addresses or hostnames of the Master and Minion servers, the communication protocols to use, the location of SSL certificates, and other relevant parameters.
+   ```mkdir -p workspace/saltcfg```
+   ```cd workspace/saltcfg```
+   ```vim master-config.conf```
+   Add below line into the **master-config.conf**
+   ``interface: 0.0.0.0``
+
+    ---------
+   The interface directive is used to specify the network interface the Salt Master should bind to. By setting it to 0.0.0.0, we're telling the Salt Master to bind to all available network interfaces. This allows the Salt Master to be accessible from any IP address, including the Docker containers.
+   
 
 
 
