@@ -190,6 +190,34 @@ The Salt community has put tremendous effort into creating hundreds of functions
 
 We can list all the available execution modules on all connected Minions using the following ```salt '*' sys.list_modules``` command.
 
+For instance, if you want to install the Apache web server on a remote system, you can run the following command:
+```
+sudo docker exec -it salt-master salt '*' pkg.install apache2
+```
+
+The command ```salt-master salt '*' pkg.install apache2 ``` will perform the following actions in detail:
+
+* ```salt-master``` refers to the Salt master, which is the central point of control for managing all connected minions.
+* ```salt '*' ``` specifies that the ```pkg.install apache2``` command should be executed on all minions connected to the Salt master, denoted by the wildcard character *.
+* ```pkg.install``` is a Salt execution module function that installs packages on remote systems.
+* ```apache2``` is the name of the package that will be installed on all the connected minions.
+
+  The command will trigger the following steps on the connected minions:
+
+1. The Salt master will send the pkg.install command with the apache2 package name to all the connected minions.
+2. Each minion will receive the command and execute it.
+3. The minion will check if the apache2 package is already installed on the system.
+4. If the package is not already installed, the minion will install it using the package manager specified for that operating system. For example, on Ubuntu or Debian-based systems, it will use apt-get to install the apache2 package.
+5. If the package is already installed, the minion will take no action and report back to the Salt master that the installation is already up-to-date.
+6. Once the installation is complete, the minion will report back to the Salt master that the installation was successful.
+
+   In summary, this command will use SaltStack to automate the installation of the apache2 package on all connected minions, making it easy to manage software packages across a large number of systems with a single command.
+
+   You can find more salt execution modules and it’s functions in the official Salt documentation:
+   [Execution moudules] https://docs.saltproject.io/en/latest/ref/modules/all/index.html
+
+  
+
 
 
     
