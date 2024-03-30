@@ -216,6 +216,9 @@ The command ```salt-master salt '*' pkg.install apache2 ``` will perform the fol
    You can find more salt execution modules and it’s functions in the official Salt documentation:
    [Execution moudules] https://docs.saltproject.io/en/latest/ref/modules/all/index.html
 
+
+## Local Execution
+
   
 
 
