@@ -302,10 +302,17 @@ To install the apache2 package on a system using Salt, you can create a state fi
       that are required to bring each minion into the desired state.
 
 
-            You can use the following command to check if Apache is installed on all connected minions:
+       You can use the following command to check if Apache is installed on all connected minions:
        
             ```salt '*' pkg.list_pkgs | grep apache```
 
+      ```/srv/salt/ ``` is the default directory where user defined Salt states are stored. This directory is used to store the Salt state files that define how the managed systems should be configured. Each Salt state is 
+       defined in a ```.sls``` file, and these files are typically organized into directories according to their function or purpose.
+
+     We can browse through all the available salt state functions related to package management on all the Salt Minions that are connected to the Salt Master using ```salt '*' sys.list_state_functions pkg ```command. To 
+     view functions for other modules, you can replace pkg with the given salt state module name in the above command.
+
+   *************
    
 
 
