@@ -164,6 +164,14 @@ We'll set up a basic Salt Master - Minion using Docker containers. We'll create 
 For example, if you want to run a date command only on a minion with id ```08549666c3a1```, then the command would look like this:- ```salt-master salt '08549666c3a1' cmd.run 'date'```.
 
 Read more about the targeting system here:- [Saltstack](https://docs.saltproject.io/en/getstarted/fundamentals/targeting.html)
+
+--------
+
+## Salt Execution Modules
+While shelling out using cmd.run is certainly useful, the real power comes when you add Salt execution functions. Salt execution modules are the core components of the SaltStack configuration management system. These modules provide a wide range of functions that can be used to manage and configure systems remotely. They are Python files that define functions that can be called using the Salt command-line interface (CLI) or through Salt's Remote Execution system.
+
+
+
     
     
 
