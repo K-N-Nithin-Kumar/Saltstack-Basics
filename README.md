@@ -216,8 +216,26 @@ The command ```salt-master salt '*' pkg.install apache2 ``` will perform the fol
    You can find more salt execution modules and it’s functions in the official Salt documentation:
    [Execution moudules] https://docs.saltproject.io/en/latest/ref/modules/all/index.html
 
+*******
 
 ## Local Execution
+
+Local execution in Salt refers to running Salt commands directly on the Minion without involving the Master. This is particularly useful when you want to execute ad-hoc commands, troubleshoot issues on a specific Minion, or when the Master is unavailable.
+
+To execute a command on a specific Minion using local execution, we use the ```salt-call``` command followed by the module and function to call.
+
+**To get the disk usage information of ```salt-minion-1```, run:**
+
+``` sudo docker exec -it salt-minion-1 salt-call disk.usage ```
+
+The ```salt-call disk.usage``` command is used to retrieve disk usage information on the local system. Here's what this command does in more detail:
+
+* ```salt-call``` is a command-line tool used to execute Salt "execution modules" locally on a minion.
+* ```disk.usage``` is the name of a Salt execution module that retrieves disk usage information for the current system.
+* When you execute ```salt-call disk.usage```, Salt will run the ```disk.usage``` module on the local system and return the results.
+
+We can browse through all the available execution functions related to disk management on all the Salt Minions that are connected to the Salt Master using ```salt '*' sys.list_functions disk ```command. 
+To view functions for other modules, you can replace disk with the given module name in the above command.
 
   
 
