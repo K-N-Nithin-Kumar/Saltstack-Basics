@@ -14,6 +14,13 @@ SaltStack is an open-source software for configuration management, remote execut
 Setting up a Salt environment involves creating a working Salt infrastructure that includes a Salt Master server and one or more Salt Minion servers, and configuring them to work together to manage your IT infrastructure.
 ****************
 We'll set up a basic Salt Master - Minion using Docker containers. We'll create 3 containers: one for the Salt master server and another two for the Salt minion servers.
+1. Install Docker on Ubuntu distro
+   ```
+      sudo apt update
+      sudo apt install docker.io -y
+      sudo systemctl start docker
+      sudo docker --version
+   ```
 
 
 
